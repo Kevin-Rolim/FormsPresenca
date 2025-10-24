@@ -147,40 +147,49 @@ const Index = () => {
                   )}
                 </div>
 
-                {/* Número de Crianças */}
-                <div className="space-y-2">
-                  <Label htmlFor="criancas" className="text-base font-semibold text-foreground">
-                    Quantas crianças vão te acompanhar?
-                  </Label>
-                  <Input
-                    id="criancas"
-                    type="number"
-                    min="0"
-                    placeholder="0"
-                    {...register("criancas", { valueAsNumber: true })}
-                    className="h-12 text-base border-2 focus-visible:border-primary"
-                  />
-                  {errors.criancas && (
-                    <p className="text-sm text-destructive">{errors.criancas.message}</p>
-                  )}
-                </div>
+                {/* Número de Crianças e Adultos */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Crianças */}
+                  <div className="space-y-2">
+                    <Label htmlFor="criancas" className="text-base font-semibold text-foreground flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                      Crianças
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="criancas"
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        {...register("criancas", { valueAsNumber: true })}
+                        className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
+                      />
+                    </div>
+                    {errors.criancas && (
+                      <p className="text-sm text-destructive">{errors.criancas.message}</p>
+                    )}
+                  </div>
 
-                {/* Número de Adultos */}
-                <div className="space-y-2">
-                  <Label htmlFor="adultos" className="text-base font-semibold text-foreground">
-                    Quantos adultos vão te acompanhar?
-                  </Label>
-                  <Input
-                    id="adultos"
-                    type="number"
-                    min="0"
-                    placeholder="0"
-                    {...register("adultos", { valueAsNumber: true })}
-                    className="h-12 text-base border-2 focus-visible:border-primary"
-                  />
-                  {errors.adultos && (
-                    <p className="text-sm text-destructive">{errors.adultos.message}</p>
-                  )}
+                  {/* Adultos */}
+                  <div className="space-y-2">
+                    <Label htmlFor="adultos" className="text-base font-semibold text-foreground flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-secondary" />
+                      Adultos
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="adultos"
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        {...register("adultos", { valueAsNumber: true })}
+                        className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
+                      />
+                    </div>
+                    {errors.adultos && (
+                      <p className="text-sm text-destructive">{errors.adultos.message}</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Submit Button */}
