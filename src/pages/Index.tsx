@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Sparkles, Heart, PartyPopper } from "lucide-react";
 import barbieLogo from "@/assets/barbie-logo.png";
 import barbieDress from "@/assets/barbie-dress.png";
 import barbieDog from "@/assets/barbie-dog.png";
+import barbieCastle from "@/assets/barbie-castle.jpg";
 
 const formSchema = z.object({
   nome: z.string().min(3, "Por favor, insira o nome completo").max(100, "Nome muito longo"),
@@ -22,7 +24,16 @@ type FormData = z.infer<typeof formSchema>;
 
 const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [showDuplicateDialog, setShowDuplicateDialog] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const submitted = localStorage.getItem("barbie-party-submitted");
+    if (submitted) {
+      setHasSubmitted(true);
+    }
+  }, []);
   
   const {
     register,
@@ -38,7 +49,15 @@ const Index = () => {
     },
   });
 
-  const onSubmit = async (data: FormData) => {
+  const handleFormSubmit = (data: FormData) => {
+    if (hasSubmitted) {
+      setShowDuplicateDialog(true);
+      return;
+    }
+    submitForm(data);
+  };
+
+  const submitForm = async (data: FormData) => {
     setIsSubmitting(true);
     
     try {
@@ -56,6 +75,8 @@ const Index = () => {
       });
 
       if (response.ok) {
+        localStorage.setItem("barbie-party-submitted", "true");
+        setHasSubmitted(true);
         toast({
           title: "Presença confirmada! 🎉",
           description: "Obrigada por confirmar! Mal podemos esperar para te ver na festa!",
@@ -73,7 +94,24 @@ const Index = () => {
       });
     } finally {
       setIsSubmitting(false);
+      setShowDuplicateDialog(false);
     }
+  };
+
+  const handleConfirmResubmit = () => {
+    const formData = {
+      nome: document.getElementById("nome") as HTMLInputElement,
+      criancas: document.getElementById("criancas") as HTMLInputElement,
+      adultos: document.getElementById("adultos") as HTMLInputElement,
+    };
+    
+    const data = {
+      nome: formData.nome.value,
+      criancas: parseInt(formData.criancas.value) || 0,
+      adultos: parseInt(formData.adultos.value) || 0,
+    };
+    
+    submitForm(data);
   };
 
   return (
@@ -85,9 +123,15 @@ const Index = () => {
         className="absolute top-20 left-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
       />
       <img
+        src={barbieCastle}
+        alt=""
+        className="absolute top-32 right-4 w-48 md:w-64 opacity-25 float pointer-events-none hidden lg:block rounded-lg"
+        style={{ animationDelay: "0.5s" }}
+      />
+      <img
         src={barbieDog}
         alt=""
-        className="absolute bottom-20 right-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
+        className="absolute bottom-20 left-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
         style={{ animationDelay: "1s" }}
       />
 
@@ -130,7 +174,7 @@ const Index = () => {
             </CardHeader>
             
             <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
                 {/* Nome Completo */}
                 <div className="space-y-2">
                   <Label htmlFor="nome" className="text-base font-semibold text-foreground">
@@ -224,6 +268,27 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Duplicate Submission Dialog */}
+      <AlertDialog open={showDuplicateDialog} onOpenChange={setShowDuplicateDialog}>
+        <AlertDialogContent className="max-w-md">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-primary">
+              <Heart className="w-5 h-5" />
+              Formulário já respondido
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              Você já confirmou sua presença anteriormente. Se enviar novamente, a resposta anterior será ignorada e apenas a nova será considerada.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmResubmit} className="bg-primary hover:bg-primary/90">
+              Confirmar mesmo assim
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
