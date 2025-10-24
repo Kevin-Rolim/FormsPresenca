@@ -12,7 +12,6 @@ import { Sparkles, Heart, PartyPopper } from "lucide-react";
 import barbieLogo from "@/assets/barbie-logo.png";
 import barbieDress from "@/assets/barbie-dress.png";
 import barbieDog from "@/assets/barbie-dog.png";
-import barbieCastle from "@/assets/barbie-castle.jpg";
 
 const formSchema = z.object({
   nome: z.string().min(3, "Por favor, insira o nome completo").max(100, "Nome muito longo"),
@@ -121,12 +120,6 @@ const Index = () => {
         src={barbieDress}
         alt=""
         className="absolute top-20 left-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
-      />
-      <img
-        src={barbieCastle}
-        alt=""
-        className="absolute top-32 right-4 w-48 md:w-64 opacity-25 float pointer-events-none hidden lg:block rounded-lg"
-        style={{ animationDelay: "0.5s" }}
       />
       <img
         src={barbieDog}
