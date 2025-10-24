@@ -139,7 +139,7 @@ const Index = () => {
           <div className="space-y-3">
             <h1 className="text-4xl md:text-6xl font-bold text-primary flex items-center justify-center gap-3 flex-wrap">
               <Sparkles className="w-8 h-8 md:w-10 md:h-10" />
-              Aniversário da Emanuelly
+              Aniversário da Emanuelle
               <Sparkles className="w-8 h-8 md:w-10 md:h-10" />
             </h1>
             <p className="text-xl md:text-2xl text-secondary font-semibold flex items-center justify-center gap-2">
