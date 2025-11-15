@@ -125,3 +125,62 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* ================================================ */
+/* ========= ✨ BLOCO DOS SPARKLES (CORRIGIDO) ========= */
+/* ================================================ */
+@layer utilities {
+  /* Animação de brilho (fade-in, scale-up, fade-out) */
+  @keyframes sparkle-animation {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Classe base para cada 'sparkle' */
+  .sparkle-bg {
+    position: absolute;
+    width: 20px; /* Tamanho do brilho */
+    height: 20px;
+    
+    /* ================================================ */
+    /* ========= 💖 CORREÇÃO APLICADA AQUI ========= */
+    /* Este é o código SVG correto para o ícone 'sparkles' (e não 'sparkle') */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNFNjFEOUIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTggMiAyMSA1bC03IDcgNCA0LTcgNy0zLTMgNy03LTQtNCA3LTcgMyAzeiNWMjFsNy03LTQtNCA3LTctMy0zLTcgNyA0LTQtNyA3IDMgeiIvPjwvc3ZnPg==');
+    /* ================================================ */
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: sparkle-animation 5s infinite;
+    opacity: 0;
+    z-index: 0; /* Para ficar atrás do conteúdo */
+  }
+
+  /* Posições e atrasos de animação diferentes para cada brilho (Total 20) */
+  .sparkle-bg:nth-child(1) { top: 10%; left: 10%; animation-delay: 0.5s; }
+  .sparkle-bg:nth-child(2) { top: 20%; left: 80%; animation-delay: 1.0s; }
+  .sparkle-bg:nth-child(3) { top: 30%; left: 50%; animation-delay: 1.5s; }
+  .sparkle-bg:nth-child(4) { top: 50%; left: 20%; animation-delay: 2.0s; }
+  .sparkle-bg:nth-child(5) { top: 60%; left: 90%; animation-delay: 2.5s; }
+  .sparkle-bg:nth-child(6) { top: 70%; left: 30%; animation-delay: 3.0s; }
+  .sparkle-bg:nth-child(7) { top: 85%; left: 70%; animation-delay: 3.5s; }
+  .sparkle-bg:nth-child(8) { top: 5%; left: 40%; animation-delay: 4.0s; }
+  .sparkle-bg:nth-child(9) { top: 40%; left: 60%; animation-delay: 4.5s; }
+  .sparkle-bg:nth-child(10) { top: 75%; left: 15%; animation-delay: 0s; }
+  
+  .sparkle-bg:nth-child(11) { top: 80%; left: 5%; animation-delay: 1.2s; }
+  .sparkle-bg:nth-child(12) { top: 90%; left: 30%; animation-delay: 2.8s; }
+  .sparkle-bg:nth-child(13) { top: 15%; left: 30%; animation-delay: 3.1s; }
+  .sparkle-bg:nth-child(14) { top: 5%; left: 70%; animation-delay: 0.8s; }
+  .sparkle-bg:nth-child(15) { top: 25%; left: 60%; animation-delay: 2.3s; }
+  .sparkle-bg:nth-child(16) { top: 45%; left: 85%; animation-delay: 3.7s; }
+  .sparkle-bg:nth-child(17) { top: 65%; left: 55%; animation-delay: 1.8s; }
+  .sparkle-bg:nth-child(18) { top: 85%; left: 45%; animation-delay: 0.3s; }
+  .sparkle-bg:nth-child(19) { top: 95%; left: 80%; animation-delay: 2.1s; }
+  .sparkle-bg:nth-child(20) { top: 55%; left: 70%; animation-delay: 4.2s; }
+}

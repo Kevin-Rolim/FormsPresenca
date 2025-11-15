@@ -9,9 +9,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Sparkles, Heart, PartyPopper } from "lucide-react";
-import barbieLogo from "@/assets/barbie-logo.png";
-import barbieDress from "@/assets/barbie-dress.png";
-import barbieDog from "@/assets/barbie-dog.png";
+
+// ================================================ //
+// ========= 💖 IMPORTS CORRIGIDOS ========= //
+// ================================================ //
+import barbieLogo from "../assets/barbie-logo.png";
+import fotoManu from "../assets/fotoManu.jpg";
+import barbieSilhouette from "../assets/barbie-silhouette.jpg"; // <-- 💖 SILHUETA DE VOLTA
 
 const formSchema = z.object({
   nome: z.string().min(3, "Por favor, insira o nome completo").max(100, "Nome muito longo"),
@@ -33,7 +37,7 @@ const Index = () => {
       setHasSubmitted(true);
     }
   }, []);
-  
+
   const {
     register,
     handleSubmit,
@@ -58,7 +62,7 @@ const Index = () => {
 
   const submitForm = async (data: FormData) => {
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch("https://hook.us2.make.com/5b26dte1v3ftnftqyilfw1s1sn36ras9", {
         method: "POST",
@@ -103,41 +107,67 @@ const Index = () => {
       criancas: document.getElementById("criancas") as HTMLInputElement,
       adultos: document.getElementById("adultos") as HTMLInputElement,
     };
-    
+
     const data = {
       nome: formData.nome.value,
       criancas: parseInt(formData.criancas.value) || 0,
       adultos: parseInt(formData.adultos.value) || 0,
     };
-    
+
     submitForm(data);
   };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Decorative Images */}
+      
+      {/* ================================================ */}
+      {/* ========= ✨ DECORAÇÃO DE SPARKLES (20) ========= */}
+      {/* ================================================ */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+        <div className="sparkle-bg"></div>
+      </div>
+
+      {/* ================================================ */}
+      {/* ========= 🎀 SILHUETA DE VOLTA (COM .JPG) ========= */}
+      {/* ================================================ */}
       <img
-        src={barbieDress}
-        alt=""
-        className="absolute top-20 left-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
-      />
-      <img
-        src={barbieDog}
-        alt=""
-        className="absolute bottom-20 left-4 w-32 md:w-48 opacity-30 float pointer-events-none hidden md:block"
-        style={{ animationDelay: "1s" }}
+        src={barbieSilhouette}
+        alt="Silhueta Barbie"
+        className="absolute bottom-0 left-0 w-32 md:w-48 pointer-events-none z-10 
+                   mix-blend-multiply opacity-40" // <-- 💖 TRUQUE PARA O .JPG
       />
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
+      {/* ================================================ */}
+      {/* ========= 💖 "RESPIRO" ADICIONADO AQUI (px-6) ========= */}
+      {/* ================================================ */}
+      <div className="container mx-auto px-6 py-8 md:py-16 relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
           <div className="flex justify-center mb-6">
             <img src={barbieLogo} alt="Barbie" className="w-32 md:w-40 sparkle" />
           </div>
-          
+
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-6xl font-bold text-primary flex items-center justify-center gap-3 flex-wrap">
+            <h1 className="font-script text-5xl md:text-7xl font-bold text-primary flex items-center justify-center gap-3 flex-wrap">
               <Sparkles className="w-8 h-8 md:w-10 md:h-10" />
               Aniversário da Emanuelle
               <Sparkles className="w-8 h-8 md:w-10 md:h-10" />
@@ -153,8 +183,21 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Form Card */}
+        {/* ================================================================== */}
+        {/* ========= INÍCIO DA SEÇÃO (IMAGEM + FORM) ========= */}
+        {/* ================================================================== */}
         <div className="max-w-2xl mx-auto">
+          
+          {/* 1. Imagem da Aniversariante */}
+          <div className="mb-8">
+            <img
+              src={fotoManu}
+              alt="Aniversariante Emanuelle com bolo da Barbie"
+              className="rounded-xl shadow-[var(--shadow-soft)] w-full h-auto object-cover"
+            />
+          </div>
+
+          {/* 2. Card do Formulário */}
           <Card className="shadow-[var(--shadow-soft)] border-2 border-primary/20">
             <CardHeader className="text-center space-y-2">
               <CardTitle className="text-3xl text-primary flex items-center justify-center gap-2">
@@ -165,7 +208,7 @@ const Index = () => {
                 Queremos muito que você faça parte deste dia especial!
               </CardDescription>
             </CardHeader>
-            
+
             <CardContent>
               <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
                 {/* Nome Completo */}
@@ -248,7 +291,7 @@ const Index = () => {
             </CardContent>
           </Card>
 
-          {/* Footer Message */}
+          {/* 3. Footer Message */}
           <div className="text-center mt-8 space-y-2">
             <p className="text-lg text-secondary font-semibold flex items-center justify-center gap-2">
               <Heart className="w-5 h-5 fill-current" />
@@ -260,6 +303,10 @@ const Index = () => {
             </p>
           </div>
         </div>
+        {/* ================================================================ */}
+        {/* ========= FIM DA SEÇÃO (IMAGEM + FORM) ========= */}
+        {/* ================================================================ */}
+
       </div>
 
       {/* Duplicate Submission Dialog */}
