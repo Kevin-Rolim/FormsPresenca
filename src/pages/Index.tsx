@@ -10,12 +10,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useToast } from "@/hooks/use-toast";
 import { Sparkles, Heart, PartyPopper } from "lucide-react";
 
-// ================================================ //
-// ========= 💖 IMPORTS CORRIGIDOS ========= //
-// ================================================ //
 import barbieLogo from "../assets/barbie-logo.png";
 import fotoManu from "../assets/fotoManu.jpg";
-import barbieSilhouette from "../assets/barbie-silhouette.jpg"; // <-- 💖 SILHUETA DE VOLTA
+import barbieSilhouette from "../assets/barbie-silhouette.jpg"; // Silhueta de volta
 
 const formSchema = z.object({
   nome: z.string().min(3, "Por favor, insira o nome completo").max(100, "Nome muito longo"),
@@ -153,12 +150,10 @@ const Index = () => {
         src={barbieSilhouette}
         alt="Silhueta Barbie"
         className="absolute bottom-0 left-0 w-32 md:w-48 pointer-events-none z-10 
-                   mix-blend-multiply opacity-40" // <-- 💖 TRUQUE PARA O .JPG
+                   mix-blend-multiply opacity-40" // TRUQUE PARA O .JPG
       />
 
-      {/* ================================================ */}
-      {/* ========= 💖 "RESPIRO" ADICIONADO AQUI (px-6) ========= */}
-      {/* ================================================ */}
+      {/* "RESPIRO" ADICIONADO AQUI (px-6) */}
       <div className="container mx-auto px-6 py-8 md:py-16 relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
@@ -227,50 +222,63 @@ const Index = () => {
                   )}
                 </div>
 
-                {/* Número de Crianças e Adultos */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Crianças */}
-                  <div className="space-y-2">
-                    <Label htmlFor="criancas" className="text-base font-semibold text-foreground flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-primary" />
-                      Crianças
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="criancas"
-                        type="number"
-                        min="0"
-                        placeholder="0"
-                        {...register("criancas", { valueAsNumber: true })}
-                        className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
-                      />
+                {/* ================================================ */}
+                {/* ========= 💖 SEÇÃO ADICIONADA AQUI 💖 ========= */}
+                {/* ================================================ */}
+                <div className="space-y-2">
+                  <Label className="text-base font-semibold text-foreground">
+                    Quantas pessoas irão (incluindo você)?
+                  </Label>
+                  
+                  {/* Número de Crianças e Adultos */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                    {/* Crianças */}
+                    <div className="space-y-2">
+                      <Label htmlFor="criancas" className="text-base font-semibold text-foreground flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-primary" />
+                        Crianças
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          id="criancas"
+                          type="number"
+                          min="0"
+                          placeholder="0"
+                          {...register("criancas", { valueAsNumber: true })}
+                          className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
+                        />
+                      </div>
+                      {errors.criancas && (
+                        <p className="text-sm text-destructive">{errors.criancas.message}</p>
+                      )}
                     </div>
-                    {errors.criancas && (
-                      <p className="text-sm text-destructive">{errors.criancas.message}</p>
-                    )}
-                  </div>
 
-                  {/* Adultos */}
-                  <div className="space-y-2">
-                    <Label htmlFor="adultos" className="text-base font-semibold text-foreground flex items-center gap-2">
-                      <Heart className="w-4 h-4 text-secondary" />
-                      Adultos
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="adultos"
-                        type="number"
-                        min="0"
-                        placeholder="0"
-                        {...register("adultos", { valueAsNumber: true })}
-                        className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
-                      />
+                    {/* Adultos */}
+                    <div className="space-y-2">
+                      <Label htmlFor="adultos" className="text-base font-semibold text-foreground flex items-center gap-2">
+                        <Heart className="w-4 h-4 text-secondary" />
+                        Adultos
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          id="adultos"
+                          type="number"
+                          min="0"
+                          placeholder="0"
+                          {...register("adultos", { valueAsNumber: true })}
+                          className="h-14 text-base border-2 focus-visible:border-primary pl-4 pr-4 text-center text-lg font-semibold"
+                        />
+                      </div>
+                      {errors.adultos && (
+                        <p className="text-sm text-destructive">{errors.adultos.message}</p>
+                      )}
                     </div>
-                    {errors.adultos && (
-                      <p className="text-sm text-destructive">{errors.adultos.message}</p>
-                    )}
                   </div>
                 </div>
+                {/* ================================================ */}
+                {/* ========= 💖 FIM DA NOVA SEÇÃO 💖 ========= */}
+                {/* ================================================ */}
+
 
                 {/* Submit Button */}
                 <Button
