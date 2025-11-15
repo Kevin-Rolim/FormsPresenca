@@ -12,7 +12,7 @@ import { Sparkles, Heart, PartyPopper } from "lucide-react";
 
 import barbieLogo from "../assets/barbie-logo.png";
 import fotoManu from "../assets/fotoManu.jpg";
-import barbieSilhouette from "../assets/barbie-silhouette.jpg"; // Silhueta de volta
+import barbieSilhouette from "../assets/barbie-silhouette.jpg"; // Silhueta
 
 const formSchema = z.object({
   nome: z.string().min(3, "Por favor, insira o nome completo").max(100, "Nome muito longo"),
@@ -61,7 +61,10 @@ const Index = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://hook.us2.make.com/5b26dte1v3ftnftqyilfw1s1sn36ras9", {
+      // ================================================ //
+      // ========= 💖 SEU NOVO LINK AQUI 💖 ========= //
+      // ================================================ //
+      const response = await fetch("https://hook.us2.make.com/vqarraipt5k568i4kua24wf6y25rd6qf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,9 +120,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       
-      {/* ================================================ */}
-      {/* ========= ✨ DECORAÇÃO DE SPARKLES (20) ========= */}
-      {/* ================================================ */}
+      {/* DECORAÇÃO DE SPARKLES (20) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="sparkle-bg"></div>
         <div className="sparkle-bg"></div>
@@ -143,17 +144,15 @@ const Index = () => {
         <div className="sparkle-bg"></div>
       </div>
 
-      {/* ================================================ */}
-      {/* ========= 🎀 SILHUETA DE VOLTA (COM .JPG) ========= */}
-      {/* ================================================ */}
+      {/* SILHUETA (COM .JPG) */}
       <img
         src={barbieSilhouette}
         alt="Silhueta Barbie"
         className="absolute bottom-0 left-0 w-32 md:w-48 pointer-events-none z-10 
-                   mix-blend-multiply opacity-40" // TRUQUE PARA O .JPG
+                   mix-blend-multiply opacity-40"
       />
 
-      {/* "RESPIRO" ADICIONADO AQUI (px-6) */}
+      {/* "RESPIRO" (px-6) */}
       <div className="container mx-auto px-6 py-8 md:py-16 relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
@@ -178,9 +177,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* ================================================================== */}
-        {/* ========= INÍCIO DA SEÇÃO (IMAGEM + FORM) ========= */}
-        {/* ================================================================== */}
+        {/* INÍCIO DA SEÇÃO (IMAGEM + FORM) */}
         <div className="max-w-2xl mx-auto">
           
           {/* 1. Imagem da Aniversariante */}
@@ -222,9 +219,7 @@ const Index = () => {
                   )}
                 </div>
 
-                {/* ================================================ */}
-                {/* ========= 💖 SEÇÃO ADICIONADA AQUI 💖 ========= */}
-                {/* ================================================ */}
+                {/* SEÇÃO "QUANTAS PESSOAS" */}
                 <div className="space-y-2">
                   <Label className="text-base font-semibold text-foreground">
                     Quantas pessoas irão (incluindo você)?
@@ -275,9 +270,6 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-                {/* ================================================ */}
-                {/* ========= 💖 FIM DA NOVA SEÇÃO 💖 ========= */}
-                {/* ================================================ */}
 
 
                 {/* Submit Button */}
@@ -311,9 +303,7 @@ const Index = () => {
             </p>
           </div>
         </div>
-        {/* ================================================================ */}
-        {/* ========= FIM DA SEÇÃO (IMAGEM + FORM) ========= */}
-        {/* ================================================================ */}
+        {/* FIM DA SEÇÃO (IMAGEM + FORM) */}
 
       </div>
 
